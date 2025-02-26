@@ -94,8 +94,8 @@ void ofxHttpUtils::threadedFunction(){
 				ofLogVerbose("ofxHttpUtils") << "(thread running) form submitted (post): "  << form.name;
 			}else{
 				string url = generateUrl(form);
-				ofLogVerbose("ofxHttpUtils") << "form submitted (get):" << form.name;
-				response = getUrl(url);
+                ofLogVerbose("ofxHttpUtils") << "form submitted (get):" << form.name;
+                response = getUrl(url, form);
 			}
     		lock();
             if(response.status!=-1) {

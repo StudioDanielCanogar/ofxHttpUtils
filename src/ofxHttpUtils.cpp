@@ -326,7 +326,7 @@ ofxHttpResponse ofxHttpUtils::doPostForm(ofxHttpForm & form){
 }
 
 // ----------------------------------------------------------------------
-ofxHttpResponse ofxHttpUtils::getUrl(string url){
+ofxHttpResponse ofxHttpUtils::getUrl(string url, ofxHttpForm& form){
 
    ofxHttpResponse response;
    try{
@@ -344,6 +344,12 @@ ofxHttpResponse ofxHttpUtils::getUrl(string url){
         		reqCookies.add(cookies[i].getName(),cookies[i].getValue());
         		req.setCookies(reqCookies);
         	}
+        }
+
+        for (unsigned int i = 0; i < form.headerIds.size(); ++i) {
+            const std::string name = form.headerIds[i].c_str();
+            const std::string val = form.headerValues[i].c_str();
+            req.set(name, val);
         }
 
 		HTTPResponse res;
